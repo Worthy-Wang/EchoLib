@@ -1,6 +1,6 @@
 ### 网络库框架简介
 该网络库框架模仿 `陈硕的Muduo库` 来实现，采用`Reactor + threadpool` 的模式：
-主线程IO，工作线程计算，能适应密集计算，不适应突发IO。
+主线程IO，工作线程计算，是能适应密集计算的`服务器框架`。
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200714210409248.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dvcnRoeV9XYW5n,size_16,color_FFFFFF,t_70)
 
