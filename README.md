@@ -1,6 +1,4 @@
-`github源码`：[https://github.com/Worthy-Wang/EchoLib](https://github.com/Worthy-Wang/EchoLib)
 
-------------
 
 ### 项目简介
 该并发服务器框架模仿 **陈硕的Muduo库**来实现，采用**reactor + threadpool**的模式，是一个能适应**密集计算**的并发服务器框架。该项目主要分为两个部分：**reactor**+ **threadpool**。**reactor**负责将**TCP连接**进行封装，并采用**Event-Loop**模式结合**epoll**多路复用进行监听，然后注册相应的**回调函数**，并且将**IO线程**与**计算线程**分离。**threadpool**部分基于**Posix线程**实现，会依次对**互斥锁**，**条件变量**，**任务队列**，**线程**，**线程池**类进行封装，同时注册相应的**回调函数**。
