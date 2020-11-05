@@ -2,6 +2,9 @@
 
 ### 项目简介
 该并发服务器框架模仿 **陈硕的Muduo库**来实现，采用**reactor + threadpool**的模式，是一个能适应**密集计算**的并发服务器框架。该项目主要分为两个部分：**reactor**+ **threadpool**。**reactor**负责将**TCP连接**进行封装，并采用**Event-Loop**模式结合**epoll**多路复用进行监听，然后注册相应的**回调函数**，并且将**IO线程**与**计算线程**分离。**threadpool**部分基于**Posix线程**实现，会依次对**互斥锁**，**条件变量**，**任务队列**，**线程**，**线程池**类进行封装，同时注册相应的**回调函数**。
+
+<br>
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200714210409248.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dvcnRoeV9XYW5n,size_16,color_FFFFFF,t_70)
 
 <br>
