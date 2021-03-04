@@ -68,6 +68,50 @@ reactor部分主要将**TCP网络编程**中的socket，bind，listen，accpet�
 
 <br>
 
+### 补充知识
 
 >**补充：不同 并发服务器模型的类别差异**
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200719203240652.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dvcnRoeV9XYW5n,size_16,color_FFFFFF,t_70)
+
+
+<br>
+
+-------------------------
+* **pthread_cond_wait如何使用？**
+
+1. 必须先pthread_mutex_lock进行加锁，线程进入锁池
+2. 进入pthread_cond_wait之后，将该线程加入内核的等待队列之后，释放锁，线程重新进入锁池
+3. 等待pthread_cond_signal唤醒之后，内核会给线程加锁，也就是线程在锁池中获得锁；
+4. 此时一般进行while条件判断：
+1）：情况满足则 执行execute语句之后再pthread_mutex_unlock解锁
+2）：情况不满足则 再次重复执行pthread_cond_wait
+
+用代码的体现形式就是：
+
+```cpp
+while (1){
+    pthread_mutex_lock(&mutex);
+    while (condition){
+        pthread_cond_wait(&cond,&mutex);
+    }
+    //execute work
+    ...
+    pthread_mutex_unlock(&mutex);
+}
+
+```
+
+
+<br>
+
+---------------------
+* **pthread_cond_signal 和 pthread_cond_broadcast的区别？**
+
+实质上这个问题和Java中的 notify 和 notifyAll的问题有相似之处。
+
+**pthread_cond_signal**: 是唤醒通过 pthread_cond_wait 进入等待队列中的某一个线程，再次进入锁池争抢锁。
+
+**pthread_cond_broadcast**: 是唤醒通过 pthread_cond_wait 进入等待队列中的所有线程，再次进入锁池争抢锁。
+
+<br>
+
